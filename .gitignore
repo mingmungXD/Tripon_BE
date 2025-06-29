@@ -1,5 +1,5 @@
 # Node modules
-node_modules/
+/node_modules
 
 # 환경 설정
 .env
