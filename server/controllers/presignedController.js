@@ -1,4 +1,4 @@
-const { getPresignedUrl } = require('../services/s3Service');
+const { getPresignedUrl } = require('../services/presignedService.js');
 
 exports.generatePresignUrl = (req, res) => {
   const { filename } = req.query;
