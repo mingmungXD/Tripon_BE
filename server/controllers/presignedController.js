@@ -15,3 +15,5 @@ exports.generatePresignUrl = (req, res) => {
     res.status(500).json({ error: '서버 오류로 URL을 생성할 수 없습니다' });
   }
 };
+
+//
