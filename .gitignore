@@ -18,5 +18,5 @@ Thumbs.db
 .idea/
 
 # 백엔드에서 쓸 수 있는 캐시
-*.tgz
+*.tgz   
 *.log

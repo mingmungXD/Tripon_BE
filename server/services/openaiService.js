@@ -1,5 +1,34 @@
-const { OpenAI } = require('openai');
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+const OpenAI = require('openai');
+
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY
+});
+
+exports.analyzeLocationFromImage = async (base64Image) => {
+  const response = await openai.chat.completions.create({
+    model: 'gpt-4o',
+    messages: [
+      {
+        role: 'user',
+        content: [
+          {
+            type: 'text',
+            text: `이 여행 사진을 보고 촬영된 국가와 도시를 추론해줘. 절대로 마크다운이나 백틱(\`\`\`)을 쓰지 말고, 반드시 이 형식으로만 응답해줘: {"country": "국가명", "city": "도시명", "confidence": "신뢰도(1-10)"}`,
+          },
+          {
+            type: 'image_url',
+            image_url: { url: base64Image },
+          },
+        ]
+      }
+    ],
+    max_tokens: 300
+  });
+
+  const content = response.choices[0].message.content;
+  return JSON.parse(content);
+};
+
 
 exports.analyzePersonalityFromImages = async (imageDescriptions) => {
   const prompt = `
